@@ -21,8 +21,8 @@ export const CONFIG = {
         Weather:
             //'imtikspIs8LTDO1ZqSjGrn4bBu4wEFL4' 
             //'B8XuuxUAXzXOlAXMBk4sXwO7KBle686Y' 
-            //'DORzMGZ05GqwG0MF4iawyRl11kWdlefK' 
-            'IEGKSVoXjPHVGB2dOOZIzghiHGGmKNzT' 
+            'DORzMGZ05GqwG0MF4iawyRl11kWdlefK' 
+            // 'IEGKSVoXjPHVGB2dOOZIzghiHGGmKNzT' //31.5.21 21:44
             //'fg2oLmTVBxIqQl0t7FORAsL6X51MyXR6' //31.5.21 15:16
             //'xpl5xM1XUPfcXQHEC11QyrI9fEukWekR' //31.5.21 10:00
     },
