@@ -1,0 +1,27 @@
+.faPlus{
+  color: #fff;
+}
+.active{
+  color: #ecea48;
+}
+button {
+  transition: background 1s ease-in-out, border 0.2s ease-in-out;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  color: #fff;
+  height: 40px;
+  background-color: transparent;
+  width: 40px;
+  margin: 5px 0;
+  cursor: pointer;
+}
+button:hover {
+  border: 1px solid rgba(255, 255, 255, 0.75);
+}
+@media only screen and (max-width : 768px ), screen and (max-height: 768px)  {
+  button {
+      height: 30px;
+      width: 30px;
+      font-size: 14px;
+  }
+}

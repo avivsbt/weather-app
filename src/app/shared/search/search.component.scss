@@ -1,0 +1,29 @@
+.cover-search {
+    width: 50%;
+    margin: 20px auto;
+    max-width: 950px;
+    position: relative;
+}
+.cover-search {
+    width: 80%;
+}
+.result-search{
+    background-color: #6D8CA0;
+    position: absolute;
+    top: 32px;
+    left: 0;
+    width: 100%;
+    text-align: left;
+    max-height: 220px;
+    overflow-y: scroll;
+    z-index: 5;
+}
+.result-search div{
+    padding: 6px;
+    border-bottom: 1px solid #fff;
+}
+.faTimes{
+    position: absolute;
+    top: 6px;
+    right: 0; 
+}

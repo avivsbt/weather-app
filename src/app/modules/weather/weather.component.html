@@ -1,0 +1,18 @@
+<app-search [searchEndPoint]="searchEndPoint" (onSelectionChanged)="selectSearch($event)"></app-search>
+<div class="container-center" *ngIf="weather$ | async as weather">
+    <div class="item-center">
+        <div>
+            <h1 class="location">{{weather.Name}}</h1>
+            <h2 class="date">{{weather.DateTime | date}}</h2>
+            <app-weather-icon [type]='weather.WeatherIcon'></app-weather-icon>
+            <div class="temp">
+                <app-weather-temperature [temperature]="weather.Temperature"></app-weather-temperature>
+            </div>
+            <p class="conditions">{{weather.WeatherText}}</p>
+        </div>
+    </div>
+    <app-weather-side-buttons [weather]='weather'></app-weather-side-buttons>
+</div>
+<div *ngIf="weather$ | async as weather">
+    <app-weather-daily-forecast [forecast]="weather.DailyForecasts"></app-weather-daily-forecast>
+</div>

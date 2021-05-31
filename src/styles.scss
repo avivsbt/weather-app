@@ -1,0 +1,80 @@
+/* You can add global styles to this file, and also import other style files */
+
+/*Fonts*/
+@import url('https://fonts.googleapis.com/css?family=Alegreya+Sans:300,300i,400,400i,500,500i,700,700i&display=swap');
+/*General*/
+* {
+    box-sizing: border-box;
+}
+*:focus {
+    outline: none;
+}
+::placeholder {
+    color: #fff;
+}
+body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Alegreya Sans', sans-serif;
+	color: #fff;
+	overflow-x: hidden;
+    height: 100vh;
+    background-color: #86B9E0;
+}
+a {
+    color: #6D8CA0;
+    font-weight: 700;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+p {
+    margin: 5px 0;
+}
+.responsive-img {
+    width: 100%;
+}
+input {
+    background-color: transparent;
+    border: none 0;
+    color: #fff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    width: 100%;
+    height: 30px;
+    font-size: 15px;
+}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+.col {
+    display: inline-block;
+    flex-grow: 1;
+}
+.item-center {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.pointer{
+	cursor: pointer;
+}
+.temp span::after {
+    content: '\00b0';
+    padding: 1px;
+}
+app-weather{
+	display: contents;
+}
+.col-3{
+    width: 33%;
+}
+@media only screen and (max-width : 768px ), screen and (max-height: 768px)  { 
+    h1,
+    h2 {
+        margin: 5px 0;
+    }
+}

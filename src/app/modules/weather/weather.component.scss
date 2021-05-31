@@ -1,0 +1,17 @@
+.container-center {
+    flex: 1;
+    position: relative;
+}
+.container-center .temp,
+.container-center .conditions {
+    font-size: 35px;
+    margin: 0;
+    display: block;
+}
+@media only screen and (max-width : 768px) {
+    .container-center .temp,
+    .container-center .conditions {
+        font-size: 25px;
+        margin: 0;
+    }
+}

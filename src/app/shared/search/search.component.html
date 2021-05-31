@@ -1,0 +1,11 @@
+<div class="cover-search">
+    <input type="text" placeholder="Search" #searchInput>
+    <fa-icon class="fa faTimes pointer" [icon]="fortawesomeService.faTimes" (click)="clearSearch()" [hidden]="onSearch"></fa-icon>
+    <div class="result-search pointer">
+        <div *ngFor="let item of resultSearch" (click)="selectSearch(item)">
+            {{item.LocalizedName}}
+        </div>
+    </div>
+</div>
+
+

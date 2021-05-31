@@ -1,0 +1,18 @@
+<!-- <div *ngFor="let user of users$ | async">
+  {{user.name}}
+</div>
+
+<div *ngIf="user$ | async as user">{{user.id}}</div> -->
+
+<header>
+  <app-header></app-header>
+</header>
+
+<main>
+  <div class="container">
+      <!-- <app-spinner></app-spinner>
+      <app-alert></app-alert> -->
+      <router-outlet></router-outlet>
+  </div>
+</main>
+

@@ -1,0 +1,10 @@
+.container-center {
+    width: 50%;
+    max-width: 650px;
+    margin: 20px auto;
+}
+@media only screen and (max-width : 768px) {
+    .container-center {
+        width: 80%;
+    }
+}
