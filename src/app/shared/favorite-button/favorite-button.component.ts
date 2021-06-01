@@ -1,4 +1,4 @@
-import { Component, Input, Injector } from '@angular/core';
+import { Component, Input, Injector, OnInit, OnDestroy } from '@angular/core';
 import { BaseComponent } from 'src/app/architecture/base.component';
 import { LocalStorageKey, LocalStorageTime } from 'src/app/enums/local-storage.enum';
 import * as Moment from 'moment';
@@ -12,7 +12,7 @@ import { Weather } from 'src/app/modules/weather/models/weather.model';
   styleUrls: ['./favorite-button.component.scss']
 })
 
-export class FavoriteButtonComponent extends BaseComponent {
+export class FavoriteButtonComponent extends BaseComponent implements OnInit, OnDestroy {
 
   @Input() item: Weather;
 
@@ -22,9 +22,18 @@ export class FavoriteButtonComponent extends BaseComponent {
     super(injector);
   }
 
+  ngOnInit(): void {
+
+  }
+
+  ngOnDestroy(): void {
+
+  }
+
   public addFavorite(): void {
 
     let items: Favorite[] = this.favoriteStorage;
+
 
     if (this.favoriteStorage && this.itemExists) {
       return;
@@ -49,7 +58,7 @@ export class FavoriteButtonComponent extends BaseComponent {
   }
 
   public get itemExists(): boolean {
-    return this.favoriteStorage.some(item => item.Key == this.item.Key);
+    return this.storageService.get<Favorite[]>(LocalStorageKey.favorites).some(item => item.Key == this.item.Key);
   }
 
   public get favoriteStorage(): Favorite[] {
