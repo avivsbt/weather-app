@@ -1,6 +1,6 @@
-<button (click)="addFavorite()"  *ngIf="!itemExists">
+<button (click)="addFavorite()"  >
     <fa-icon class="fa faPlus" [icon]="fortawesomeService.faPlus"></fa-icon>
 </button>
-<button (click)="removeFavorite()" *ngIf="itemExists">
+<button (click)="removeFavorite()" >
     <fa-icon class="fa faMinus" [icon]="fortawesomeService.faMinus"></fa-icon> 
 </button>
