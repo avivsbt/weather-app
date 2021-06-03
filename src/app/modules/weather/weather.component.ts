@@ -1,8 +1,7 @@
 import { Component, OnInit, OnDestroy, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { BaseComponent } from 'src/app/architecture/base.component';
-import { entityExists, selectCurrentWeather } from 'src/app/modules/weather/state/selectors/weather.selectors';
+import { selectCurrentWeather, selectWeatherEntityExists } from 'src/app/modules/weather/state/selectors/weather.selectors';
 import { CONFIG } from 'src/app/shared/config';
 import { LoadWeather, Weather } from './models/weather.model';
 import * as WeatherActions from './state/actions/weather.actions'
@@ -38,14 +37,11 @@ export class WeatherComponent extends BaseComponent implements OnInit, OnDestroy
     }
 
     public selectSearch(weather: LoadWeather): void {
-        this.subscriptions.push(this.select(entityExists, { id: weather.Key }).subscribe(isWeatherInStore => {
-            if (isWeatherInStore) {
-             //this.dispatch(WeatherActions.setCurrentWeather, { Key: weather.Key });
-            } else {
-                
-            }
-            console.log(isWeatherInStore)
-        }));
-        this.dispatch(WeatherActions.loadWeather, { LoadWeather: { Key: weather.Key, LocalizedName: weather.LocalizedName, Country: weather.Country } });
+        if (this.selectUnsubscribe(selectWeatherEntityExists, { id: weather.Key })) {
+            this.dispatch(WeatherActions.setCurrentWeather, { Key: weather.Key });
+        }
+        else {
+            this.dispatch(WeatherActions.loadWeather, { LoadWeather: { Key: weather.Key, LocalizedName: weather.LocalizedName, Country: weather.Country } });
+        }
     }
 }

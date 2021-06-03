@@ -17,13 +17,15 @@ export const initialState: State = adapter.getInitialState({});
 
 export const reducer = createReducer(
     initialState,
-    // on(FavoritesActions.setFavorite, (state, { favorite }) => {
-    //     return adapter.addOne(favorite, state)
-    // }),
-
     on(
         FavoritesActions.setFavorite,
         (state, action) => adapter.addOne(action.favorite, {
+            ...state
+        })
+    ),   
+    on(
+        FavoritesActions.setFavorites,
+        (state, action) => adapter.addMany(action.favorite, {
             ...state
         })
     ),    

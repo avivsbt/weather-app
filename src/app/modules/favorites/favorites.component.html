@@ -1,4 +1,4 @@
 <div class="container-center">
-    <!-- <app-item-favorites *ngFor="let item of favorites" [favorite]="item"></app-item-favorites> -->
-    <div class="col">No favorites</div>
+    <app-favorites-item [weathers]="weathers"></app-favorites-item>
+    <div class="col" *ngIf="weathers.length == 0">No favorites</div>
 </div>

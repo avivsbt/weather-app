@@ -27,15 +27,26 @@ export const selectCurrentWeather = createSelector(
     (entities, props) => entities[props]
 );
 
-export const selecttWeatherIds = createSelector(
+export const selectWeatherIds = createSelector(
     selectWeatherFeature,
     WeatherReducer.selectIds
 );
 
-export const entityExists = createSelector(
+export const selectWeatherEntityExists = createSelector(
     selectAllEntities,
-    selecttWeatherIds,
-    (entities, props): boolean => {
-        return entities[props.toString()] == undefined ? false : true;
+    (entities: { [x: string]: any; }, props: { id: string | number; }): boolean => {
+        return entities[props.id] == undefined ? false : true;
+    }
+);
+
+export const selectFavoritesInWeatherStore = createSelector(
+    selectAllWeather,
+    (entities: Weather[], props: { ids: any; }): any => {
+        return entities.filter((item: Weather) => {
+            if (props.ids.includes(item.Key)) {
+                return item
+            }
+            return null;
+        });
     }
 );

@@ -5,6 +5,7 @@ import * as Moment from 'moment';
 import * as FavoritesActions from 'src/app/modules/favorites/state/actions/favorites.actions'
 import { Favorite } from 'src/app/modules/favorites/models/favorite.model';
 import { Weather } from 'src/app/modules/weather/models/weather.model';
+import { selectAllFavorite, selectFavoriteEntityExists } from 'src/app/modules/favorites/state/selectors/favorites.selectors';
 
 @Component({
   selector: 'favorite-button',
@@ -23,7 +24,7 @@ export class FavoriteButtonComponent extends BaseComponent implements OnInit, On
   }
 
   ngOnInit(): void {
-
+    
   }
 
   ngOnDestroy(): void {
@@ -32,15 +33,12 @@ export class FavoriteButtonComponent extends BaseComponent implements OnInit, On
 
   public addFavorite(): void {
 
-    let items: Favorite[] = this.favoriteStorage;
-
-
-    if (this.favoriteStorage && this.itemExists) {
+    if (this.itemExists) {
       return;
     }
-
+    
     const favorite = { Key: this.item.Key, LocalizedName: this.item.Name, Country: this.item.Country };
-    items = this.favoriteStorage ? [...items, favorite] : [favorite];
+    let items: Favorite[]  = this.favoriteStorage ? [...this.favoriteStorage, favorite] : [favorite];
 
     this.storageService.set(LocalStorageKey.favorites, items, Moment().add(30, LocalStorageTime.Days).toDate());
     this.dispatch(FavoritesActions.setFavorite, { favorite: favorite });
@@ -58,11 +56,10 @@ export class FavoriteButtonComponent extends BaseComponent implements OnInit, On
   }
 
   public get itemExists(): boolean {
-    return this.storageService.get<Favorite[]>(LocalStorageKey.favorites).some(item => item.Key == this.item.Key);
+    return this.selectUnsubscribe(selectFavoriteEntityExists, { id: this.item.Key });
   }
 
   public get favoriteStorage(): Favorite[] {
-    return this.storageService.get<Favorite[]>(LocalStorageKey.favorites);
+    return this.selectUnsubscribe(selectAllFavorite);
   }
-
 }

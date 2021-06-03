@@ -1,0 +1,29 @@
+<div *ngFor="let weather of weathers">
+    <div class="row item-favorites">
+        <div class="col pointer col-3">
+            <div class="item-center">
+                <div>
+                    <p class="location">
+                        {{weather?.Name}}
+                        <app-weather-temperature class="temp" [temperature]="weather?.Temperature"></app-weather-temperature>
+                    </p>
+                    <p class="conditions">{{weather?.WeatherText}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col pointer col-3">
+            <div class="item-center">
+                <div>
+                    <app-weather-icon [small]='true' [type]='weather?.WeatherIcon'></app-weather-icon>
+                </div>
+            </div>
+        </div>
+        <div class="col col-3">
+            <div class="item-center">
+                <div>
+                    <favorite-button [item]='weather'></favorite-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

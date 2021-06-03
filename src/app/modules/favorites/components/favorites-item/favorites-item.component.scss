@@ -1,0 +1,21 @@
+.item-favorites {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 10px 0;
+}
+.item-favorites :last-child{
+    border-bottom: none;
+}
+button {
+    transition: background 1s ease-in-out, border 0.2s ease-in-out;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    color: #fff;
+    height: 40px;
+    background-color: transparent;
+    width: 40px;
+    margin: 5px 0;
+    cursor: pointer;
+}
+button:hover {
+    border: 1px solid rgba(255, 255, 255, 0.75);
+}

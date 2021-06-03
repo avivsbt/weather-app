@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FavoritesRoutingModule } from './favorites-routing.module';
-import { FavoritesComponent } from '../favorites/favorites.component';
+import { CommonModule } from '@angular/common';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { FavoritesComponent } from '../favorites/favorites.component';
+import { FavoritesItemComponent } from './components/favorites-item/favorites-item.component';
 
 @NgModule({
   imports: [
@@ -11,10 +12,12 @@ import { SharedModule } from 'src/app/shared/shared.module';
     SharedModule.forRoot()
   ],
   exports: [
-    FavoritesComponent
+    FavoritesComponent,
+    FavoritesItemComponent
   ],
   declarations: [
-    FavoritesComponent
+    FavoritesComponent,
+    FavoritesItemComponent
   ],
   providers: [],
 })

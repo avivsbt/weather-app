@@ -3,4 +3,6 @@ import { Favorite } from '../../models/favorite.model';
 
 export const setFavorite = createAction('[Favorite] Set favorite', props<{ favorite: Favorite }>());
 
+export const setFavorites = createAction('[Favorite] Set favorites', props<{ favorite: Favorite[] }>());
+
 export const deleteFavorite = createAction('[Favorite] Delete favorite', props<{ Key: string }>());
