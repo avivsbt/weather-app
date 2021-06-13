@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy, Injector } from '@angular/core';
 import { BaseComponent } from 'src/app/architecture/base.component';
 import { LoadWeather, Weather } from '../weather/models/weather.model';
-import { selectFavoritesInWeatherStore, selectWeatherIds } from '../weather/state/selectors/weather.selectors';
+import { selectGetFavoritesFromWeatherStore, selectWeatherIds } from '../weather/state/selectors/weather.selectors';
 import { Favorite } from './models/favorite.model';
-import { selectFavoriteIds, selectHandleFavoritesIfExistsInWeatherStore } from './state/selectors/favorites.selectors';
+import { selectFavoriteIds, selectFilterFavoritesFromWeatherStore } from './state/selectors/favorites.selectors';
 import * as WeatherActions from 'src/app/modules/weather/state/actions/weather.actions'
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-favorites',
@@ -14,7 +15,7 @@ import * as WeatherActions from 'src/app/modules/weather/state/actions/weather.a
 
 export class FavoritesComponent extends BaseComponent implements OnInit, OnDestroy {
 
-  public weathers: Weather[];
+  public weathers$: Observable<Weather[]>;
 
   constructor(
     private injector: Injector
@@ -24,20 +25,20 @@ export class FavoritesComponent extends BaseComponent implements OnInit, OnDestr
 
   ngOnInit(): void {
 
-    let favorites: Favorite[] = this.selectUnsubscribe(selectHandleFavoritesIfExistsInWeatherStore, { ids: this.selectUnsubscribe(selectWeatherIds) });
+    let favorites: Favorite[] = this.selectUnsubscribe(selectFilterFavoritesFromWeatherStore, { ids: this.selectUnsubscribe(selectWeatherIds) });
 
     favorites.forEach((weather: LoadWeather) => {
       this.dispatch(WeatherActions.loadWeather, { LoadWeather: { Key: weather.Key, LocalizedName: weather.LocalizedName, Country: weather.Country } });
     });
 
-    this.subscriptions.push(this.select(selectFavoritesInWeatherStore, { ids: this.selectUnsubscribe(selectFavoriteIds) }).subscribe((weathers: Weather[]) => {
-      this.weathers = weathers;
+    this.subscriptions.push(this.select(selectFavoriteIds).subscribe((ids: string[]) => {
+      this.weathers$ = this.select(selectGetFavoritesFromWeatherStore, { ids: ids });
     }));
 
   }
 
   ngOnDestroy(): void {
-
+    super.ngOnDestroy();
   }
 
 }

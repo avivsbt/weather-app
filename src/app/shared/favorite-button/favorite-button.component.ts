@@ -16,6 +16,7 @@ import { selectAllFavorite, selectFavoriteEntityExists } from 'src/app/modules/f
 export class FavoriteButtonComponent extends BaseComponent implements OnInit, OnDestroy {
 
   @Input() item: Weather;
+  public favorites: Favorite[];
 
   constructor(
     private injector: Injector
@@ -24,11 +25,13 @@ export class FavoriteButtonComponent extends BaseComponent implements OnInit, On
   }
 
   ngOnInit(): void {
-    
+    this.subscriptions.push(this.select(selectAllFavorite).subscribe((favorites: Favorite[]) => {
+      this.favorites = favorites;
+    }));
   }
 
   ngOnDestroy(): void {
-
+    super.ngOnDestroy();
   }
 
   public addFavorite(): void {
@@ -38,28 +41,21 @@ export class FavoriteButtonComponent extends BaseComponent implements OnInit, On
     }
     
     const favorite = { Key: this.item.Key, LocalizedName: this.item.Name, Country: this.item.Country };
-    let items: Favorite[]  = this.favoriteStorage ? [...this.favoriteStorage, favorite] : [favorite];
+    let items: Favorite[]  = this.favorites ? [...this.favorites, favorite] : [favorite];
 
     this.storageService.set(LocalStorageKey.favorites, items, Moment().add(30, LocalStorageTime.Days).toDate());
     this.dispatch(FavoritesActions.setFavorite, { favorite: favorite });
   }
 
   public removeFavorite(): void {
-
-    let items: Favorite[] = this.favoriteStorage;
-
-    if (items && this.itemExists) {
-      this.storageService.set(LocalStorageKey.favorites, items.filter(item => item.Key !== this.item.Key), Moment().add(30, LocalStorageTime.Days).toDate());
+    if (this.favorites && this.itemExists) {
+      this.storageService.set(LocalStorageKey.favorites, this.favorites.filter(item => item.Key !== this.item.Key), Moment().add(30, LocalStorageTime.Days).toDate());
       this.dispatch(FavoritesActions.deleteFavorite, { Key: this.item.Key });
     }
-
   }
 
   public get itemExists(): boolean {
     return this.selectUnsubscribe(selectFavoriteEntityExists, { id: this.item.Key });
   }
 
-  public get favoriteStorage(): Favorite[] {
-    return this.selectUnsubscribe(selectAllFavorite);
-  }
 }

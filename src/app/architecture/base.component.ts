@@ -5,23 +5,13 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { AppState } from '../store';
 import { select, Store } from '@ngrx/store';
 
-/*plugins*/
-import * as Moment from 'moment';
-
-/*models*/
-import { currentLocation } from 'src/app/models/current-location.model';
-
-/*store*/
-import * as actionSettings from '../store/actions/settings.actions';
-import * as FavoritesActions from 'src/app/modules/favorites/state/actions/favorites.actions'
-
 /*services*/
 import { StorageService } from "../services/local-storage.service";
 import { FortawesomeService } from "../services/fortawesome.service.ts";
 
 /*enums*/
 import { Unit } from "../enums/temperature-unit.enum";
-import { LocalStorageKey, LocalStorageTime } from "../enums/local-storage.enum";
+import { LocalStorageKey } from "../enums/local-storage.enum";
 import { Favorite } from "../modules/favorites/models/favorite.model";
 
 @Component({
@@ -54,47 +44,20 @@ export class BaseComponent implements OnInit, OnDestroy {
         this.unsubscribe();
     }
 
-    /*init app*/
-    public init(): void {
-        this.setLocation();
-        this.setTemperatureUnit(this.storageService.get<Unit>(LocalStorageKey.temperatureUnit));
-        this.setFavorites();
-    }
-
-    public setLocation(): void {
-        navigator.geolocation.getCurrentPosition((pos) => {
-            this.dispatch(actionSettings.setCurrentLocation, {
-                currentLocation: new currentLocation({ latitude: pos.coords.latitude.toString(), longitude: pos.coords.longitude.toString() })
-            });
-
-        }, () => {
-            this.dispatch(actionSettings.setCurrentLocation, {
-                currentLocation: new currentLocation({ latitude: "32.106086399999995", longitude: "34.829107199999996" })
-            });
-        });
-    }
-
-    public setTemperatureUnit(temperatureUnit: Unit): void {
-        if (!this.storageService.get<Unit>(LocalStorageKey.temperatureUnit)) {
-            temperatureUnit = Unit.Celsius;
-        }
-        this.storageService.set(LocalStorageKey.temperatureUnit, temperatureUnit, Moment().add(30, LocalStorageTime.Days).toDate());
-        this.dispatch(actionSettings.setTemperatureUnit, { temperatureUnit })
-    }
-
-    public setFavorites(): void {
-        let favorites: Favorite[] = this.storageService.get<Favorite[]>(LocalStorageKey.favorites);
-        if(favorites){
-            this.dispatch(FavoritesActions.setFavorites, { favorite: favorites });
-        }
-    }
-
     /*global function*/
     public get getTemperatureUnit(): typeof Unit {
         return Unit;
     }
 
-    public unsubscribe(): void{
+    public get LocalStorageKeyTemperatureUnit(): Unit {
+        return this.storageService.get<Unit>(LocalStorageKey.temperatureUnit)
+    }
+
+    public get LocalStorageKeyFavorites(): Favorite[] {
+        return this.storageService.get<Favorite[]>(LocalStorageKey.favorites)
+    }
+
+    public unsubscribe(): void {
         for (let subscription of this.subscriptions) {
             subscription.unsubscribe();
         }

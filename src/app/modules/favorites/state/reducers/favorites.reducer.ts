@@ -37,6 +37,5 @@ export const reducer = createReducer(
 export const { selectIds, selectEntities, selectAll, selectTotal } = adapter.getSelectors();
 
 export function selectFavoriteId(a: Favorite): string {
-    console.log('reduser', a)
     return a.Key;
 }

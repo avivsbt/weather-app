@@ -1,4 +1,3 @@
 <div class="container-center">
-    <app-favorites-item [weathers]="weathers"></app-favorites-item>
-    <div class="col" *ngIf="weathers.length == 0">No favorites</div>
+    <app-favorites-item [weathers]="weathers$ | async"></app-favorites-item>
 </div>

@@ -2,7 +2,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { Unit } from 'src/app/enums/temperature-unit.enum';
 import { currentLocation } from 'src/app/models/current-location.model';
-import { Spinner } from 'src/app/models/spinner.models';
 import * as settingsActions from '../actions/settings.actions';
 
 export const settingsFeatureKey = 'settings';
@@ -10,7 +9,7 @@ export const settingsFeatureKey = 'settings';
 export interface State {
     currentLocation: currentLocation;
     temperatureUnit: Unit;
-    spinner: Spinner
+    spinner: boolean
 }
 
 export const initialState: State = {

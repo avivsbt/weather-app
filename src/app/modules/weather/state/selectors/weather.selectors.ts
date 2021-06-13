@@ -39,7 +39,7 @@ export const selectWeatherEntityExists = createSelector(
     }
 );
 
-export const selectFavoritesInWeatherStore = createSelector(
+export const selectGetFavoritesFromWeatherStore = createSelector(
     selectAllWeather,
     (entities: Weather[], props: { ids: any; }): any => {
         return entities.filter((item: Weather) => {

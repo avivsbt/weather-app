@@ -15,8 +15,6 @@ import * as WeatherActions from './state/actions/weather.actions'
 export class WeatherComponent extends BaseComponent implements OnInit, OnDestroy {
 
     public weather$: Observable<Weather>;
-    public weatherExists$: Observable<boolean>;
-
     public searchUrl: string;
     public searchEndPoint: string;
 
@@ -28,12 +26,11 @@ export class WeatherComponent extends BaseComponent implements OnInit, OnDestroy
     }
 
     ngOnInit(): void {
-        super.ngOnInit();
         this.weather$ = this.select(selectCurrentWeather);
     }
 
     ngOnDestroy(): void {
-        super.ngOnDestroy();
+        
     }
 
     public selectSearch(weather: LoadWeather): void {

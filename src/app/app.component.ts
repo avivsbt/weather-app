@@ -1,7 +1,4 @@
-import { Component, Injector, OnDestroy, OnInit } from '@angular/core';
-import { BaseComponent } from './architecture/base.component';
-import { selectLocation } from 'src/app/store/selectors/settings.selectors';
-import * as actionWeather from 'src/app/modules/weather/state/actions/weather.actions';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -9,25 +6,11 @@ import * as actionWeather from 'src/app/modules/weather/state/actions/weather.ac
   styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent extends BaseComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit {
 
-  constructor(
-    private injector: Injector
-  ) {
-    super(injector)
-    this.init();
-  }
+  constructor() { }
 
   ngOnInit(): void {
-    this.subscriptions.push(this.select(selectLocation).subscribe(currentLocation => {
-      if (currentLocation) {
-        this.dispatch(actionWeather.loadWeatherByLocation, { currentLocation });
-      }
-    }));
-  }
-
-  ngOnDestroy(): void {
 
   }
-
 }

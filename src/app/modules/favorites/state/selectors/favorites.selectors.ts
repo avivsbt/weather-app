@@ -28,7 +28,7 @@ export const selectFavoriteEntityExists = createSelector(
     }
 );
 
-export const selectHandleFavoritesIfExistsInWeatherStore = createSelector(
+export const selectFilterFavoritesFromWeatherStore = createSelector(
     selectAllFavorite,
     (entities: Favorite[], props: { ids: any; }): any => {
         return entities.filter((item: Favorite) => {

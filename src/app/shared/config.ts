@@ -1,3 +1,5 @@
+import { currentLocation } from '../models/current-location.model';
+
 function getBaseUrl(): string {
     return 'https://dataservice.accuweather.com';
 }
@@ -19,13 +21,14 @@ export const CONFIG = {
     },
     APIKey: {
         Weather:
-            'imtikspIs8LTDO1ZqSjGrn4bBu4wEFL4' 
-            //'B8XuuxUAXzXOlAXMBk4sXwO7KBle686Y' 
-            // 'DORzMGZ05GqwG0MF4iawyRl11kWdlefK' 
-            //'IEGKSVoXjPHVGB2dOOZIzghiHGGmKNzT' 
-            //'fg2oLmTVBxIqQl0t7FORAsL6X51MyXR6' //31.5.21 15:16
-            //'xpl5xM1XUPfcXQHEC11QyrI9fEukWekR' //31.5.21 10:00
+            'imtikspIs8LTDO1ZqSjGrn4bBu4wEFL4'
+        //'B8XuuxUAXzXOlAXMBk4sXwO7KBle686Y' 
+        // 'DORzMGZ05GqwG0MF4iawyRl11kWdlefK' 
+        //'IEGKSVoXjPHVGB2dOOZIzghiHGGmKNzT' 
+        //'fg2oLmTVBxIqQl0t7FORAsL6X51MyXR6' //31.5.21 15:16
+        //'xpl5xM1XUPfcXQHEC11QyrI9fEukWekR' //31.5.21 10:00
     },
+    defaultLocation: new currentLocation({ latitude: '32.106086399999995', longitude: '34.829107199999996' })
 };
 
 
