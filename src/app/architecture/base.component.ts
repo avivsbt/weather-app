@@ -7,11 +7,14 @@ import { select, Store } from '@ngrx/store';
 
 /*services*/
 import { StorageService } from "../services/local-storage.service";
-import { FortawesomeService } from "../services/fortawesome.service.ts";
+import { FortawesomeService } from "../services/utils/fortawesome.service.ts";
+import { TranslateService } from "@ngx-translate/core";
 
 /*enums*/
 import { Unit } from "../enums/temperature-unit.enum";
 import { LocalStorageKey } from "../enums/local-storage.enum";
+
+/*models*/
 import { Favorite } from "../modules/favorites/models/favorite.model";
 
 @Component({
@@ -26,6 +29,7 @@ export class BaseComponent implements OnInit, OnDestroy {
     public router: Router;
     public storageService: StorageService;
     public fortawesomeService: FortawesomeService;
+    public translateService : TranslateService;
 
     constructor(private injectorObj: Injector) {
         this.subscriptions = [];
@@ -34,6 +38,7 @@ export class BaseComponent implements OnInit, OnDestroy {
         this.router = this.injectorObj.get(Router);
         this.storageService = this.injectorObj.get(StorageService);
         this.fortawesomeService = this.injectorObj.get(FortawesomeService);
+        this.translateService = this.injectorObj.get(TranslateService);
     }
 
     ngOnInit(): void {
@@ -65,7 +70,7 @@ export class BaseComponent implements OnInit, OnDestroy {
     }
 
     /*cover function*/
-    public dispatch(action: any, data: any): void {
+    public dispatch(action: any, data?: any): void {
         this.store.dispatch(action(data));
     }
 

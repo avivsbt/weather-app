@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as WeatherActions from '../actions/weather.actions';
-import { mergeMap, map, catchError } from 'rxjs/operators';
-import { forkJoin, of, throwError } from 'rxjs';
+import { mergeMap, map } from 'rxjs/operators';
+import { forkJoin } from 'rxjs';
 import { WeatherApiService } from 'src/app/modules/weather/services/weather-api.service.ts';
 
 @Injectable()
@@ -21,10 +21,6 @@ export class WeatherEffects {
                                 Country: geoposition.Country.EnglishName
                             }
                         })
-                    ),
-                    catchError((error) =>
-                        //of(WeatherActions.loadWeatherFailure({ error }))
-                        throwError(error)
                     )
                 )
             )
@@ -52,17 +48,10 @@ export class WeatherEffects {
                                 DailyForecasts: result[1].DailyForecasts
                             }
                         })
-                    ),
-                    catchError((error) =>
-                        //of(console.log(error))
-                        throwError(error)
                     )
                 ))
         );
     });
-
-
-
 
     constructor(
         private actions$: Actions,

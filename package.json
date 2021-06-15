@@ -27,6 +27,8 @@
     "@ngrx/router-store": "^12.0.0",
     "@ngrx/store": "^12.0.0",
     "@ngrx/store-devtools": "^12.0.0",
+    "@ngx-translate/core": "^13.0.0",
+    "@ngx-translate/http-loader": "^6.0.0",
     "angular-2-local-storage": "^3.0.2",
     "express": "^4.17.1",
     "moment": "^2.17.1",

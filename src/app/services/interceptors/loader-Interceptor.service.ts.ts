@@ -13,7 +13,7 @@ export class LoaderInterceptor implements HttpInterceptor {
     ) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        Promise.resolve(null).then(() => this.store.dispatch(actionSettings.handleSpinner({ spinner: true }))); //TODO: check if spinner is exists + catch error
+        Promise.resolve(null).then(() => this.store.dispatch(actionSettings.handleSpinner({ spinner: true }))); //TODO: check if spinner is exists
 
         return next.handle(req).pipe(
             finalize(() => this.store.dispatch(actionSettings.handleSpinner({ spinner: false })))

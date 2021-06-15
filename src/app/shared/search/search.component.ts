@@ -1,7 +1,7 @@
 import { Component, ViewChild, ElementRef, AfterViewInit, Output, EventEmitter, Input, Injector } from '@angular/core';
 import { fromEvent } from 'rxjs';
 import { debounceTime, map, distinctUntilChanged, filter } from 'rxjs/operators';
-import { SearchApiService } from 'src/app/services/search-api.service';
+import { SearchApiService } from 'src/app/services/api/search-api.service';
 import { BaseComponent } from 'src/app/architecture/base.component';
 
 @Component({

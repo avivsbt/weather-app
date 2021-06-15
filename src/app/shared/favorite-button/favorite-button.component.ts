@@ -6,6 +6,8 @@ import * as FavoritesActions from 'src/app/modules/favorites/state/actions/favor
 import { Favorite } from 'src/app/modules/favorites/models/favorite.model';
 import { Weather } from 'src/app/modules/weather/models/weather.model';
 import { selectAllFavorite, selectFavoriteEntityExists } from 'src/app/modules/favorites/state/selectors/favorites.selectors';
+import { AlertService } from 'src/app/services/alert.service';
+import { AlertType } from 'src/app/enums/alert.enum';
 
 @Component({
   selector: 'favorite-button',
@@ -19,7 +21,8 @@ export class FavoriteButtonComponent extends BaseComponent implements OnInit, On
   public favorites: Favorite[];
 
   constructor(
-    private injector: Injector
+    private injector: Injector,
+    private alertService: AlertService 
   ) {
     super(injector);
   }
@@ -45,12 +48,14 @@ export class FavoriteButtonComponent extends BaseComponent implements OnInit, On
 
     this.storageService.set(LocalStorageKey.favorites, items, Moment().add(30, LocalStorageTime.Days).toDate());
     this.dispatch(FavoritesActions.setFavorite, { favorite: favorite });
+    this.alertService.addAlert(this.translateService.instant('favorite_add-item'), AlertType.Success);
   }
 
   public removeFavorite(): void {
     if (this.favorites && this.itemExists) {
       this.storageService.set(LocalStorageKey.favorites, this.favorites.filter(item => item.Key !== this.item.Key), Moment().add(30, LocalStorageTime.Days).toDate());
       this.dispatch(FavoritesActions.deleteFavorite, { Key: this.item.Key });
+      this.alertService.addAlert(this.translateService.instant('favorite_remov-item'), AlertType.Info);
     }
   }
 

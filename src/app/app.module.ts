@@ -3,7 +3,7 @@ import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from 'src/environments/environment';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { WeatherModule } from './modules/weather/weather.module';
 
 /*store*/
@@ -27,9 +27,14 @@ import { CommonModule } from '@angular/common';
 
 /*interceptor*/
 import { LoaderInterceptor } from './services/interceptors/loader-Interceptor.service.ts';
+import { DEFAULT_TIMEOUT, ErrorInterceptor } from './services/interceptors/error-Interceptor.service.ts';
 
 /*services*/
 import { StartUpService } from './services/startup.service';
+
+/*translate*/
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { createTranslateLoader } from './translation/translation-loader';
 
 const appStartUp = (startup: StartUpService) => {
   return () => {
@@ -48,6 +53,14 @@ const appStartUp = (startup: StartUpService) => {
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot(reducers, { metaReducers }),
+    TranslateModule.forRoot({
+      defaultLanguage: 'en-US',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
+    }),    
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
@@ -65,6 +78,8 @@ const appStartUp = (startup: StartUpService) => {
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: DEFAULT_TIMEOUT, useValue: 30000 },
     { provide: APP_INITIALIZER, useFactory: appStartUp, multi: true, deps: [StartUpService] }
   ],
   bootstrap: [AppComponent],
