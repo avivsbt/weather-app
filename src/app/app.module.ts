@@ -18,6 +18,7 @@ import { WeatherEffects } from './modules/weather/state/effects/weather.effects'
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
+import { AlertComponent } from './shared/alert/alert.component';
 
 /*plugins*/
 import { LocalStorageModule } from 'angular-2-local-storage';
@@ -46,7 +47,8 @@ const appStartUp = (startup: StartUpService) => {
   declarations: [
     AppComponent,
     HeaderComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    AlertComponent
   ],
   imports: [
     CommonModule,
@@ -60,7 +62,7 @@ const appStartUp = (startup: StartUpService) => {
         useFactory: (createTranslateLoader),
         deps: [HttpClient]
       }
-    }),    
+    }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,

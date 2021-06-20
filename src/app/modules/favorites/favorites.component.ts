@@ -40,5 +40,4 @@ export class FavoritesComponent extends BaseComponent implements OnInit, OnDestr
   ngOnDestroy(): void {
     super.ngOnDestroy();
   }
-
 }

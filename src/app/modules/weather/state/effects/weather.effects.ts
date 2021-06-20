@@ -19,7 +19,8 @@ export class WeatherEffects {
                                 Key: geoposition.Key,
                                 LocalizedName: geoposition.LocalizedName,
                                 Country: geoposition.Country.EnglishName
-                            }
+                            },
+                            setCurrent: action.setCurrent
                         })
                     )
                 )
@@ -35,8 +36,9 @@ export class WeatherEffects {
                     this.weatherApiService.getCurrentConditions(action.LoadWeather.Key),
                     this.weatherApiService.getForecasts(action.LoadWeather.Key),
                 ]).pipe(
-                    map((result) =>
-                        WeatherActions.loadWeatherSuccess({
+                    mergeMap((result) => {
+                        let setCurrentWeather = WeatherActions.setCurrentWeather({ Key: action.LoadWeather.Key });
+                        let loadWeatherSuccess = WeatherActions.loadWeatherSuccess({
                             weather: {
                                 Key: action.LoadWeather.Key,
                                 Name: action.LoadWeather.LocalizedName,
@@ -48,7 +50,8 @@ export class WeatherEffects {
                                 DailyForecasts: result[1].DailyForecasts
                             }
                         })
-                    )
+                        return action.setCurrent ? [loadWeatherSuccess, setCurrentWeather] : [loadWeatherSuccess];
+                    })
                 ))
         );
     });

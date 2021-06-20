@@ -11,7 +11,7 @@ import { selectSpinner } from 'src/app/store/selectors/settings.selectors';
 
 export class SpinnerComponent extends BaseComponent implements OnInit, OnDestroy {
 
-  spinner$: Observable<boolean>;
+  public spinner$: Observable<boolean>;
   
   constructor(
     private injector: Injector

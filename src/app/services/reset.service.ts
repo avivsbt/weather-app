@@ -60,13 +60,13 @@ export class ResetService extends BaseComponent {
             }, () => {
                 this.dispatch(actionSettings.setCurrentLocation, {
                     currentLocation: CONFIG.defaultLocation
-                }); 
+                });
                 resolve(true);
             });
         });
     }
 
-    public setWeatherByLocation(): void {
-        this.dispatch(actionWeather.loadWeatherByLocation, { currentLocation: this.selectUnsubscribe(selectLocation) });
+    public setWeatherByLocation(setCurrent: boolean = true): void {
+        this.dispatch(actionWeather.loadWeatherByLocation, { currentLocation: this.selectUnsubscribe(selectLocation), setCurrent });
     }
 }

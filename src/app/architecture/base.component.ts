@@ -16,6 +16,8 @@ import { LocalStorageKey } from "../enums/local-storage.enum";
 
 /*models*/
 import { Favorite } from "../modules/favorites/models/favorite.model";
+import { Path } from "../enums/path.enum";
+import { PathService } from "../services/navigate/path.service";
 
 @Component({
     template: ``
@@ -30,6 +32,7 @@ export class BaseComponent implements OnInit, OnDestroy {
     public storageService: StorageService;
     public fortawesomeService: FortawesomeService;
     public translateService : TranslateService;
+    public pathService : PathService;
 
     constructor(private injectorObj: Injector) {
         this.subscriptions = [];
@@ -39,6 +42,7 @@ export class BaseComponent implements OnInit, OnDestroy {
         this.storageService = this.injectorObj.get(StorageService);
         this.fortawesomeService = this.injectorObj.get(FortawesomeService);
         this.translateService = this.injectorObj.get(TranslateService);
+        this.pathService = this.injectorObj.get(PathService);
     }
 
     ngOnInit(): void {
@@ -82,5 +86,9 @@ export class BaseComponent implements OnInit, OnDestroy {
         let state: any;
         this.select(selectName, value).subscribe(result => state = result).unsubscribe();
         return state;
+    }
+
+    public navigateTo(path: Path, params?: any): void{
+        this.router.navigate([path], params);
     }
 }

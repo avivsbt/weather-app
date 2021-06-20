@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
+import { BaseComponent } from 'src/app/architecture/base.component';
 
 @Component({
   selector: 'app-header',
@@ -6,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 
-export class HeaderComponent implements OnInit {
+export class HeaderComponent extends BaseComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private injector: Injector,
+  ) {
+    super(injector);
+  }
 
   ngOnInit() {
 

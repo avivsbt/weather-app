@@ -1,0 +1,19 @@
+.alert {
+    color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    z-index: 100;
+    padding: 2px 0;
+    position: relative;
+}
+
+.alert-info {
+    background-color: #cacaca;
+}
+
+.alert-success{
+    background-color: #79d643;
+}
+
+.alert-error{
+    background-color: #ff3737;
+}

@@ -14,7 +14,6 @@ export class StorageService {
         let entity = new StorageEntity<T>();
         entity.entity = value;
         entity.timestamp = expires.getTime();
-        let now = new Date();
         if (Date.now() > entity.timestamp) {
             this.localStorageService.remove(key);
         } else {

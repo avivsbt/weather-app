@@ -30,6 +30,12 @@ a {
 a:hover {
     text-decoration: underline;
 }
+a:not([href]){
+    cursor: pointer; 
+    -webkit-user-select: none; 
+    -moz-user-select: none; 
+    user-select: none
+}
 p {
     margin: 5px 0;
 }

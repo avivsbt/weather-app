@@ -30,7 +30,7 @@ export class WeatherComponent extends BaseComponent implements OnInit, OnDestroy
     }
 
     ngOnDestroy(): void {
-        
+
     }
 
     public selectSearch(weather: LoadWeather): void {
@@ -38,7 +38,7 @@ export class WeatherComponent extends BaseComponent implements OnInit, OnDestroy
             this.dispatch(WeatherActions.setCurrentWeather, { Key: weather.Key });
         }
         else {
-            this.dispatch(WeatherActions.loadWeather, { LoadWeather: { Key: weather.Key, LocalizedName: weather.LocalizedName, Country: weather.Country } });
+            this.dispatch(WeatherActions.loadWeather, { LoadWeather: { Key: weather.Key, LocalizedName: weather.LocalizedName, Country: weather.Country }, setCurrent: true });
         }
     }
 }

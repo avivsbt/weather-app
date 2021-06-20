@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, Injector, Input } from '@angular/core';
 import { BaseComponent } from 'src/app/architecture/base.component';
 import { Weather } from 'src/app/modules/weather/models/weather.model';
+import * as WeatherActions from 'src/app/modules/weather/state/actions/weather.actions'
 
 @Component({
     selector: 'app-favorites-item',
@@ -24,6 +25,11 @@ export class FavoritesItemComponent extends BaseComponent implements OnInit, OnD
 
     ngOnDestroy(): void {
 
+    }
+
+    public selectCurrentWeather(key: string): void {
+        this.dispatch(WeatherActions.setCurrentWeather, { Key: key });
+        this.navigateTo(this.pathService.weather);
     }
 
 }

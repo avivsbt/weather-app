@@ -21,11 +21,7 @@ export const initialState: State = adapter.getInitialState({
 export const reducer = createReducer(
     initialState,
     on(
-        WeatherActions.loadWeatherSuccess,
-        (state, action) => adapter.addOne(action.weather, {
-            ...state,
-            currentWeather: action.weather.Key,
-        })
+        WeatherActions.loadWeatherSuccess, (state, action) => adapter.addOne(action.weather, { ...state })
     ),
     on(WeatherActions.setCurrentWeather, (state, action) => {
         return {
