@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { LocalStorageKey } from '../enums/local-storage.enum';
 import { Unit } from '../enums/temperature-unit.enum';
-import { StorageService } from './local-storage.service';
+import { StorageService } from './utils/local-storage.service';
 import { ResetService } from './reset.service';
-import { AlertType } from '../enums/alert.enum';
-import { AlertService } from './alert.service';
+import { AlertType } from '../shared/modules/alert/enums/alert.enum';
+import { AlertService } from '../shared/modules/alert/services/alert.service';
 import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({ providedIn: 'root' })

@@ -6,8 +6,7 @@ import * as FavoritesActions from 'src/app/modules/favorites/state/actions/favor
 import { Favorite } from 'src/app/modules/favorites/models/favorite.model';
 import { Weather } from 'src/app/modules/weather/models/weather.model';
 import { selectAllFavorite, selectFavoriteEntityExists } from 'src/app/modules/favorites/state/selectors/favorites.selectors';
-import { AlertService } from 'src/app/services/alert.service';
-import { AlertType } from 'src/app/enums/alert.enum';
+import { AlertType } from 'src/app/shared/modules/alert/enums/alert.enum';
 
 @Component({
   selector: 'favorite-button',
@@ -22,7 +21,6 @@ export class FavoriteButtonComponent extends BaseComponent implements OnInit, On
 
   constructor(
     private injector: Injector,
-    private alertService: AlertService 
   ) {
     super(injector);
   }

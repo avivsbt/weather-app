@@ -1,7 +1,7 @@
 
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
-import { Alert } from 'src/app/models/alerts.model';
+import { Alert } from 'src/app/shared/modules/alert/models/alerts.model';
 import * as alertsActions from '../actions/alerts.actions';
 
 export const alertsFeatureKey = 'alerts';
@@ -19,7 +19,8 @@ export const initialState: State = adapter.getInitialState({});
 export const reducer = createReducer(
     initialState,
     on(alertsActions.addAlert, (state, action) => adapter.addOne(action.alert, { ...state })),
-    on(alertsActions.clearAlerts, (state) => adapter.removeAll({ ...state, selectId: null }))
+    on(alertsActions.clearAlerts, (state) => adapter.removeAll({ ...state, selectId: null })),
+    on(alertsActions.updateAlert, (state, { update }) => adapter.updateOne(update, state))
 );
 
 export const { selectIds, selectEntities, selectAll, selectTotal } = adapter.getSelectors();

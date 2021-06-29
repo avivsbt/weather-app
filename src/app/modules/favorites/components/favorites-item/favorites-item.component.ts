@@ -1,7 +1,5 @@
-import { Component, OnInit, OnDestroy, Injector, Input } from '@angular/core';
-import { BaseComponent } from 'src/app/architecture/base.component';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Weather } from 'src/app/modules/weather/models/weather.model';
-import * as WeatherActions from 'src/app/modules/weather/state/actions/weather.actions'
 
 @Component({
     selector: 'app-favorites-item',
@@ -9,27 +7,17 @@ import * as WeatherActions from 'src/app/modules/weather/state/actions/weather.a
     styleUrls: ['./favorites-item.component.scss']
 })
 
-export class FavoritesItemComponent extends BaseComponent implements OnInit, OnDestroy {
+export class FavoritesItemComponent implements OnInit {
 
     @Input() weathers: Weather[];
+    @Output() selectCurrentWeather: EventEmitter<string> = new EventEmitter<string>();
 
-    constructor(
-        private injector: Injector
-    ) {
-        super(injector);
-    }
+    constructor() { }
 
-    ngOnInit(): void {
+    ngOnInit(): void { }
 
-    }
-
-    ngOnDestroy(): void {
-
-    }
-
-    public selectCurrentWeather(key: string): void {
-        this.dispatch(WeatherActions.setCurrentWeather, { Key: key });
-        this.navigateTo(this.pathService.weather);
+    public onSelectCurrentWeather(key: string): void {
+        this.selectCurrentWeather.emit(key);
     }
 
 }

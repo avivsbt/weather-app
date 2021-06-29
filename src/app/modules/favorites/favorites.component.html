@@ -1,3 +1,3 @@
 <div class="container-center">
-    <app-favorites-item [weathers]="weathers$ | async"></app-favorites-item>
+    <app-favorites-item [weathers]="weathers$ | async" (selectCurrentWeather)="selectCurrentWeather($event)"></app-favorites-item>
 </div>

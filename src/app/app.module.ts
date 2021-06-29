@@ -16,9 +16,9 @@ import { WeatherEffects } from './modules/weather/state/effects/weather.effects'
 
 /*component*/
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './shared/header/header.component';
-import { SpinnerComponent } from './shared/spinner/spinner.component';
-import { AlertComponent } from './shared/alert/alert.component';
+import { HeaderComponent } from './shared/components/header/header.component';
+import { SpinnerComponent } from './shared/modules/spinner/spinner.component';
+import { AlertComponent } from './shared/modules/alert/alert.component';
 
 /*plugins*/
 import { LocalStorageModule } from 'angular-2-local-storage';
@@ -48,7 +48,7 @@ const appStartUp = (startup: StartUpService) => {
     AppComponent,
     HeaderComponent,
     SpinnerComponent,
-    AlertComponent
+    AlertComponent,
   ],
   imports: [
     CommonModule,

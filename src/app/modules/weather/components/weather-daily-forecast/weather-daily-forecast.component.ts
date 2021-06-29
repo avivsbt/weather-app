@@ -11,11 +11,8 @@ export class WeatherDailyForecastComponent implements OnInit {
 
   @Input() forecast: DailyForecasts[];
 
-
   constructor() { }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void { }
 
 }

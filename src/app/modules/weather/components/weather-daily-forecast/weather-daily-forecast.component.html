@@ -2,7 +2,7 @@
     <div class="item-day col" *ngFor="let item of forecast">
         <div class="item-center">
             <div>
-                <h3 class="day">{{item.Date | date:'E'}}</h3>
+                <h3 class="day">{{item.Date | date:'E'}}</h3> 
                 <app-weather-icon [small]='true' [type]='item.Day.Icon'></app-weather-icon>
                 <p class="conditions">{{item.Day.IconPhrase}}</p>
             </div>

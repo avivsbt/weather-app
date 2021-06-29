@@ -1,0 +1,6 @@
+<div *ngFor="let item of alerts">
+    <div *ngIf="item.view && !item.read" [ngClass]="['alert', 'alert-' + item.type]">
+        <div (click)="closeAlert(item)" class="alert-close">X</div>
+        {{item?.data.message}}
+    </div>
+</div>

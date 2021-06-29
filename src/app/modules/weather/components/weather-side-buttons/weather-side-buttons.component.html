@@ -1,10 +1,8 @@
 <div class="cover-buttons item-center">
     <div>
         <favorite-button [item]='weather'></favorite-button>
-        <button *ngIf="temperatureUnit$ | async as temperatureUnit" class="unit" (click)="toggleUnit(temperatureUnit)" [innerHtml]="temperatureUnit == getTemperatureUnit.Celsius ? 'C' : 'F'"></button>
-        <button (click)="toggleLocation()">
-            <fa-icon class="fa" [icon]="fortawesomeService.faLocationArrow"></fa-icon>
-        </button>
+        <button class="unit" (click)="onToggleUnit(temperatureUnit)">{{temperatureUnit | tempConverter}}</button>  
+        <button (click)="onToggleLocation()"> <fa-icon class="fa" [icon]="icon"></fa-icon></button>
     </div>
 </div>
 

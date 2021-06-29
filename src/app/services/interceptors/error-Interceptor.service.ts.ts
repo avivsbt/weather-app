@@ -3,8 +3,8 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { Observable } from 'rxjs';
 import { of } from 'rxjs';
 import { catchError, tap, timeout } from 'rxjs/operators';
-import { AlertType } from 'src/app/enums/alert.enum';
-import { AlertService } from '../alert.service';
+import { AlertType } from 'src/app/shared/modules/alert/enums/alert.enum';
+import { AlertService } from '../../shared/modules/alert/services/alert.service';
 
 export const DEFAULT_TIMEOUT = new InjectionToken<number>('defaultTimeout');
 

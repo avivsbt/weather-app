@@ -6,6 +6,6 @@ export const loadWeatherByLocation = createAction('[Weather] Load weather by loc
 
 export const loadWeather = createAction('[Weather] Load weather', props<{ LoadWeather: LoadWeather, setCurrent: boolean }>());
 
-export const loadWeatherSuccess = createAction('[Weather Effect] Load weather success', props<{ weather: Weather }>());
+export const loadWeatherSuccess = createAction('[Weather] Load weather success', props<{ weather: Weather }>());
 
 export const setCurrentWeather = createAction('[Weather] Set current weather', props<{ Key: string }>());

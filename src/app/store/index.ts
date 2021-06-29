@@ -1,7 +1,7 @@
 import { ActionReducerMap, ActionReducer, MetaReducer } from '@ngrx/store';
 import * as fromRouter from '@ngrx/router-store';
 import * as fromSettings from './reducers/settings.reducer';
-import * as fromAlerts from './reducers/alerts.reducer';
+import * as fromAlerts from '../shared/modules/alert/state/reducers/alerts.reducer';
 import * as fromWeather from '../modules/weather/state/reducers/weather.reducer';
 import * as fromFavorite from '../modules/favorites/state/reducers/favorites.reducer';
 import { environment } from '../../environments/environment';

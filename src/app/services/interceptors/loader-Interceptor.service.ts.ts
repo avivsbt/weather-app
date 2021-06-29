@@ -27,14 +27,11 @@ export class LoaderInterceptor implements HttpInterceptor {
             }
         });
         return next.handle(req).pipe(
-            finalize(() =>
-                setTimeout(() => {
-                    if (this.spinner) {
-                        this.store.dispatch(actionSettings.handleSpinner({ spinner: false }));
-                    }
-                }, 1000)
-
-            )
+            finalize(() => {
+                if (this.spinner) {
+                    this.store.dispatch(actionSettings.handleSpinner({ spinner: false }));
+                }
+            })
         );
     }
 }

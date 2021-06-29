@@ -6,9 +6,10 @@ import { AppState } from '../store';
 import { select, Store } from '@ngrx/store';
 
 /*services*/
-import { StorageService } from "../services/local-storage.service";
+import { StorageService } from "../services/utils/local-storage.service";
 import { FortawesomeService } from "../services/utils/fortawesome.service.ts";
 import { TranslateService } from "@ngx-translate/core";
+import { AlertService } from "../shared/modules/alert/services/alert.service";
 
 /*enums*/
 import { Unit } from "../enums/temperature-unit.enum";
@@ -33,6 +34,7 @@ export class BaseComponent implements OnInit, OnDestroy {
     public fortawesomeService: FortawesomeService;
     public translateService : TranslateService;
     public pathService : PathService;
+    public alertService: AlertService;
 
     constructor(private injectorObj: Injector) {
         this.subscriptions = [];
@@ -43,6 +45,7 @@ export class BaseComponent implements OnInit, OnDestroy {
         this.fortawesomeService = this.injectorObj.get(FortawesomeService);
         this.translateService = this.injectorObj.get(TranslateService);
         this.pathService = this.injectorObj.get(PathService);
+        this.alertService = this.injectorObj.get(AlertService);
     }
 
     ngOnInit(): void {

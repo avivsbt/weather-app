@@ -1,9 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, Injector } from '@angular/core';
-import { Observable } from 'rxjs';
-import { BaseComponent } from 'src/app/architecture/base.component';
-import { Unit } from 'src/app/enums/temperature-unit.enum';
-import { ResetService } from 'src/app/services/reset.service';
-import { selectTemperatureUnit } from 'src/app/store/selectors/settings.selectors';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Weather } from '../../models/weather.model';
 
 @Component({
@@ -12,34 +7,24 @@ import { Weather } from '../../models/weather.model';
   styleUrls: ['./weather-side-buttons.components.scss']
 })
 
-export class WeatherSideButtonsComponent extends BaseComponent implements OnInit, OnDestroy {
+export class WeatherSideButtonsComponent implements OnInit {
 
   @Input() weather: Weather;
-  public temperatureUnit$: Observable<Unit>;
+  @Input() temperatureUnit: string;
+  @Input() icon: any;
+  @Output() toggleUnit: EventEmitter<string> = new EventEmitter<string>();
+  @Output() toggleLocation: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(
-    private injector: Injector,
-    private resetService: ResetService
-  ) {
-    super(injector);
-    this.temperatureUnit$ = this.select(selectTemperatureUnit);
+  constructor() { }
+
+  ngOnInit(): void { }
+
+  public onToggleLocation(): void {
+    this.toggleLocation.emit();
   }
 
-  ngOnInit(): void {
-
-  }
-
-  ngOnDestroy(): void {
-
-  }  
-
-  toggleLocation(): void {
-    this.resetService.setWeatherByLocation();
-  }
-
-  toggleUnit(value: Unit): void {
-    let unit = this.getTemperatureUnit.Celsius === value ? Unit.Fahrenheit : Unit.Celsius;
-    this.resetService.setTemperatureUnit(unit);
+  public onToggleUnit(value: string): void {
+    this.toggleUnit.emit(value);
   }
 
 }

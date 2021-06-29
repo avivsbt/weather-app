@@ -20,7 +20,7 @@ import { WeatherSideButtonsComponent } from './components/weather-side-buttons/w
   declarations: [
     WeatherComponent,
     WeatherDailyForecastComponent,
-    WeatherSideButtonsComponent
+    WeatherSideButtonsComponent,
   ],
   providers: [],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

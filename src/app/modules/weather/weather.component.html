@@ -1,5 +1,6 @@
 <app-search [searchEndPoint]="searchEndPoint" (onSelectionChanged)="selectSearch($event)"></app-search>
 <div class="container-center" *ngIf="weather$ | async as weather">
+    
     <div class="item-center">
         <div>
             <h1 class="location">{{weather.Name}}</h1>
@@ -11,7 +12,17 @@
             <p class="conditions">{{weather.WeatherText}}</p>
         </div>
     </div>
-    <app-weather-side-buttons [weather]='weather'></app-weather-side-buttons>
+
+    <div *ngIf="temperatureUnit$ | async as temperatureUnit">
+        <app-weather-side-buttons 
+        [weather]='weather' 
+        [temperatureUnit]="temperatureUnit"
+        [icon]="fortawesomeService.faLocationArrow" 
+        (toggleUnit)="toggleUnit($event)"
+        (toggleLocation)="toggleLocation()"
+        ></app-weather-side-buttons>
+    </div>
+    
 </div>
 <div *ngIf="weather$ | async as weather">
     <app-weather-daily-forecast [forecast]="weather.DailyForecasts"></app-weather-daily-forecast>

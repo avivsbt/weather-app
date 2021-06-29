@@ -24,20 +24,28 @@ export class FavoritesComponent extends BaseComponent implements OnInit, OnDestr
   }
 
   ngOnInit(): void {
+    this.fetchFavorites();
 
+    this.subscriptions.push(this.select(selectFavoriteIds).subscribe((ids: string[]) => {
+      this.weathers$ = this.select(selectGetFavoritesFromWeatherStore, { ids: ids });
+    }));
+  }
+
+  ngOnDestroy(): void {
+    super.ngOnDestroy();
+  }
+
+
+  private fetchFavorites(): void {
     let favorites: Favorite[] = this.selectUnsubscribe(selectFilterFavoritesFromWeatherStore, { ids: this.selectUnsubscribe(selectWeatherIds) });
 
     favorites.forEach((weather: LoadWeather) => {
       this.dispatch(WeatherActions.loadWeather, { LoadWeather: { Key: weather.Key, LocalizedName: weather.LocalizedName, Country: weather.Country } });
     });
-
-    this.subscriptions.push(this.select(selectFavoriteIds).subscribe((ids: string[]) => {
-      this.weathers$ = this.select(selectGetFavoritesFromWeatherStore, { ids: ids });
-    }));
-
   }
 
-  ngOnDestroy(): void {
-    super.ngOnDestroy();
+  public selectCurrentWeather(key: string): void {
+    this.dispatch(WeatherActions.setCurrentWeather, { Key: key });
+    this.navigateTo(this.pathService.weather);
   }
 }

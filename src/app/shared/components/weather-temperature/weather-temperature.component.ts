@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/architecture/base.component';
 import { Unit } from 'src/app/enums/temperature-unit.enum';
 import { selectTemperatureUnit } from 'src/app/store/selectors/settings.selectors';
-import { Temperature } from '../../modules/weather/models/current-conditions.model';
+import { Temperature } from '../../../modules/weather/models/current-conditions.model';
 
 @Component({
     selector: 'app-weather-temperature',

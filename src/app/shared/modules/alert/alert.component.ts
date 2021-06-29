@@ -1,8 +1,9 @@
 import { Component, Injector, OnDestroy, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Update } from '@ngrx/entity';
 import { BaseComponent } from 'src/app/architecture/base.component';
-import { Alert } from 'src/app/models/alerts.model';
-import { selectAllAlerts } from 'src/app/store/selectors/alerts.selectors';
+import { Alert } from 'src/app/shared/modules/alert/models/alerts.model';
+import { selectAllAlerts } from 'src/app/shared/modules/alert/state/selectors/alerts.selectors';
+import * as actionAlerts from './state/actions/alerts.actions'
 
 @Component({
     selector: 'app-alert',
@@ -30,4 +31,7 @@ export class AlertComponent extends BaseComponent implements OnInit, OnDestroy {
         super.ngOnDestroy();
     }
 
+    public closeAlert(alert: Alert): void {
+        this.alertService.closeAlert(alert);
+    }
 }
